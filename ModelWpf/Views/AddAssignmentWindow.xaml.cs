@@ -10,19 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ModelWpf
+namespace ModelWpf.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for AddAssignmentWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddAssignmentWindow : Window
     {
-        public MainWindow()
+        public AddAssignmentWindow()
         {
             InitializeComponent();
+        }
+
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
         }
     }
 }

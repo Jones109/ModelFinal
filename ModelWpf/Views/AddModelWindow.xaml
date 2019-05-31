@@ -1,0 +1,110 @@
+﻿<Window x:Class="ModelWpf.AddModelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModelWpf"
+        mc:Ignorable="d"
+        Title="AddModelWindow" Height="350" Width="341.861">
+    <DockPanel Name ="dockPanelMain">
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Navn</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Telefon nummer</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Adresse</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Højde</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Vægt</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Hårfarve</Label>
+            <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Kommentarer</Label>
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxName"
+                         Text="{Binding Path=NewModel.Name}"
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxPhone" 
+                         Text="{Binding Path=NewModel.PhoneNumber}"
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxAddress" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=NewModel.Address}"
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxHeight" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=NewModel.Height}"
+                         Grid.Column="1"
+                         Grid.Row="3"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxWeight" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=NewModel.Weight}"
+                         Grid.Column="1"
+                         Grid.Row="4"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxHair" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=NewModel.HairColor}"
+                         Grid.Column="1"
+                         Grid.Row="5"
+                         MinWidth="100"
+                />
+            <TextBox Margin="0,0,0,0"
+                         Name="tbxComment" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=NewModel.Comments}"
+                         Grid.Column="1"
+                         Grid.Row="6"
+                         MinWidth="100"
+                />
+
+            <Grid Grid.Row="7" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="applyButton" HorizontalAlignment="Center" Click="ButtonBase_OnClick"  Content="Tilføj" Grid.Column="0" BorderThickness="2"/>
+                <Button x:Name="closeButton" HorizontalAlignment="Center" Content="Luk" IsCancel="true" Grid.Column="1"/>
+            </Grid>
+            
+                
+           
+        </Grid>
+
+    </DockPanel>
+</Window>

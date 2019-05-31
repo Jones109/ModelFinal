@@ -2,8 +2,47 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:ModelWpf"
-             StartupUri="MainWindow.xaml">
+             StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate x:Key="modelTemplate">
+            <WrapPanel>
+                <TextBlock Text="{Binding Path=Name}" Padding="5, 0" 
+                           Width="75" 
+                />
+                <TextBlock Text="{Binding Path=PhoneNumber}" Padding="5, 0"
+                           Width="100"
+                />
+                <TextBlock Text="{Binding Path=Address}" Padding="5, 0" 
+                           Width="75" 
+                />
+                <TextBlock Text="{Binding Path=Height}" Padding="5, 0"
+                />
+                <TextBlock Text="{Binding Path=Weight}" Padding="5, 0"
+                />
+                <TextBlock Text="{Binding Path=HairColor}" Padding="5, 0"
+                />
+                <TextBlock Text="{Binding Path=Comments}" Padding="5, 0"
+                />
+            </WrapPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="assTemplate">
+            <WrapPanel>
+                <TextBlock Text="{Binding Path=Client}" Padding="5, 0" 
+                           Width="75" 
+                />
+                <TextBlock Text="{Binding Path=StartDate, StringFormat=dd-MM-yyyy}" Padding="5, 0"
+                           Width="100"
+                />
+                <TextBlock Text="{Binding Path=DurationDays}" Padding="5, 0" 
+                           Width="75" 
+                />
+                <TextBlock Text="{Binding Path=Location}" Padding="5, 0"
+                />
+                <TextBlock Text="{Binding Path=NumModels}" Padding="5, 0"
+                />
+                <TextBlock Text="{Binding Path=Comments}" Padding="5, 0"
+                />
+            </WrapPanel>
+        </DataTemplate>
     </Application.Resources>
 </Application>

@@ -1,0 +1,258 @@
+﻿<Window x:Class="ModelWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ModelWpf"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+  <Window.DataContext>
+        <local:MainWindowViewModel/>
+    </Window.DataContext>
+    
+    <DockPanel Name ="dockPanelMain">
+        <ToolBar DockPanel.Dock="Top"  Height="39" FontSize="20" FontWeight="ExtraBold" Background="White">
+
+            <Button x:Name="addModelButton" ToolTip="Tilføj Model" HorizontalAlignment="Right" Command="{Binding Path=AddNewModelCommand}">
+            
+                <Image Source="..\Images\add.gif" />
+                </Button>
+
+            <Button ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="250,0,0,0" Command="{Binding Path=AddModelToAssignmentCommand}">
+                <Image Source="..\Images\add.gif" />
+            </Button>
+
+
+
+            <Button ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="250,0,0,0" Command="{Binding Path=AddNewAssignmentCommand}">
+                    <Image Source="..\Images\add.gif" />
+                </Button>
+
+            
+            
+
+
+        </ToolBar>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Binding Model-->
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Navn</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Telefon nummer</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Adresse</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Højde</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Vægt</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Hårfarve</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Kommentarer</Label>
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxName" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.Name, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxPhone" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.PhoneNumber, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxAddress" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.Address, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxHeight" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.Height, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="3"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxWeight" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.Weight, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="4"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxHair" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.HairColor, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="5"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxComment" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentModel.Comments, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="6"
+                         MinWidth="100"
+                />
+            </Grid>
+
+            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Kunde navn</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Start dato</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Antal dage</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Lokation</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" >Antal modeller</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Kommentarer</Label>
+
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxClient" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.Client, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="0"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxDate" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.StartDate, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="1"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxDur" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.DurationDays, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="2"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxLocation" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.Location, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="3"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxModels" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.NumModels, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="4"
+                         MinWidth="100"
+                />
+                <TextBox Margin="0,0,0,0"
+                         Name="tbxComments" 
+                         VerticalAlignment="Center" 
+                         HorizontalAlignment="center" 
+                         Text="{Binding Path=CurrentAss.Comments, IsAsync=True}"
+                         IsReadOnly="True"
+                         Grid.Column="1"
+                         Grid.Row="5"
+                         MinWidth="100"
+                />
+
+
+            </Grid>
+                <ListBox ItemsSource="{Binding Path=Models, IsAsync=True}"
+                     SelectedItem="{Binding Path=CurrentModel}"
+                     SelectedIndex="{Binding Path=CurrentModelIndex}"
+                     ItemTemplate="{StaticResource modelTemplate}"
+                     IsSynchronizedWithCurrentItem="True"
+                     Name="lbxModels" 
+                     Grid.Column="0"
+                     Grid.Row="1"
+                     Margin="0,0,0,0"
+            />
+            <ListBox ItemsSource="{Binding Path=PlannedAss, IsAsync=True}"
+                     SelectedItem="{Binding Path=CurrentAss}"
+                     SelectedIndex="{Binding Path=CurrentPlannedAssIndex}"
+                     ItemTemplate="{StaticResource assTemplate}"
+                     IsSynchronizedWithCurrentItem="True"
+                     Name="lbxPlannedAss" 
+                     Grid.Column="1"
+                     Grid.Row="1"
+                     Margin="0,0,0,0"
+            />
+            <ListBox ItemsSource="{Binding Path=IncomingAss, IsAsync=True}"
+                     SelectedItem="{Binding Path=CurrentAss}"
+                     SelectedIndex="{Binding Path=CurrentIncomingAssIndex}"
+                     ItemTemplate="{StaticResource assTemplate}"
+                     IsSynchronizedWithCurrentItem="True"
+                     Name="lbxIncomingAss" 
+                     Grid.Column="1"
+                     Grid.Row="0"
+                     Margin="0,0,0,0"
+             />
+            
+        </Grid>
+    </DockPanel>
+    
+</Window>

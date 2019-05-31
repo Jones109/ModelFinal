@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,8 +17,8 @@ namespace ModelWpf.DAL
         public Repository()
         {
             _options = new DbContextOptionsBuilder<ModelDbContext>()
-                .UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=ModelDB;Trusted_Connection=true;MultipleActiveResultSets=true")
-                .Options;
+                .UseSqlServer("Server = (localdb)\\MSSQLLocalDB; Database = ModelDB; Trusted_Connection = true; MultipleActiveResultSets = true")
+                           .Options;
         }
 
         public bool CreateDB()
@@ -35,20 +36,21 @@ namespace ModelWpf.DAL
         #region Models
 
 
-        public async Task<List<Model>> GetAllModels()
+        public async Task<ObservableCollection<Model>> GetAllModels()
         {
             using (var context = new ModelDbContext(_options))
             {
-                return await context.Models.ToListAsync();
+                return new ObservableCollection<Model>(await context.Models.ToListAsync());
             }
         }
 
-        public async Task InsertModel(Model model)
+        public int InsertModel(Model model)
         {
             using (var context = new ModelDbContext(_options))
             {
-                await context.Models.AddAsync(model);
-                await context.SaveChangesAsync();
+                 context.Models.Add(model);
+                 context.SaveChanges();
+                return model.Id;
             }
         }
 
@@ -59,37 +61,53 @@ namespace ModelWpf.DAL
         #region Assignment
 
 
-        public async Task InsertAssignment(Assignment assignment)
+        public int InsertAssignment(Assignment assignment)
         {
             using (var context = new ModelDbContext(_options))
             {
-                await context.Assignments.AddAsync(assignment);
-                await context.SaveChangesAsync();
+                context.Assignments.Add(assignment);
+                context.SaveChanges();
+                return assignment.Id;
             }
         }
 
-        public async Task<List<Assignment>> GetPlannedAssignments()
+        public async Task<ObservableCollection<Assignment>> GetPlannedAssignments()
         {
             using (var context = new ModelDbContext(_options))
             {
-                return await context.Assignments.Where(x => x.Planned == true).ToListAsync();
+                return new ObservableCollection<Assignment>( await context.Assignments.Where(x => x.Planned == true).ToListAsync());
             }
         }
 
-        public async Task<List<Assignment>> GetIncomingAssignments()
+        public async Task<ObservableCollection<Assignment>> GetIncomingAssignments()
         {
             using (var context = new ModelDbContext(_options))
             {
-                return await context.Assignments.Where(x => x.Planned == false).ToListAsync();
+                return new ObservableCollection<Assignment>( await context.Assignments.Where(x => x.Planned == false).ToListAsync());
             }
         }
 
+        public void UpdateAssignment(Assignment ass)
+        {
+            using (var context = new ModelDbContext(_options))
+            {
+                var entity = context.Assignments.FirstOrDefault(
+                    h => h.Id == ass.Id);
+
+                entity.Planned = ass.Planned;
+
+                context.Update(entity);
+
+                context.SaveChanges();
+            }
+
+        }
         #endregion
 
 
         #region Model_Assignment
 
-        public async Task AddModelToAssignment(int modelId, int assignmentId)
+        public List<Assignment> AddModelToAssignment(int modelId, int assignmentId)
         {
             using (var context = new ModelDbContext(_options))
             {
@@ -98,11 +116,12 @@ namespace ModelWpf.DAL
                     AssignmentId = assignmentId,
                     ModelId = modelId
                 };
+               
 
-                await context.Model_Assignments.AddAsync(newModel_Assignment);
-                await context.SaveChangesAsync();
+                context.Model_Assignments.Add(newModel_Assignment);
+                context.SaveChanges();
 
-
+                return context.Assignments.Where(x => x.Id == assignmentId).Include(x=>x.Model_Assignments).ToList();
 
             }
         }
