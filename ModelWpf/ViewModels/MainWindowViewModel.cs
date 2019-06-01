@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
-using ModelWpf.Data;
-using ModelWpf.DAL;
+using DAL;
 using ModelWpf.ViewModels;
 using ModelWpf.Views;
 using Prism.Commands;
@@ -27,6 +26,7 @@ namespace ModelWpf
         public MainWindowViewModel()
         {
             _repository = new Repository();
+            _repository.CreateDB();
 
 
             /*

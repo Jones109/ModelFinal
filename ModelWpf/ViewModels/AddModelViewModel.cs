@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using ModelWpf.Data;
+using DAL;
 using Prism.Commands;
 using Prism.Mvvm;
 
