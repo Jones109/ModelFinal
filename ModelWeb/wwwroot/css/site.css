@@ -10,12 +10,17 @@ a.navbar-brand {
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+  font-size: 10px;
 }
 @media (min-width: 768px) {
   html {
-    font-size: 16px;
+    font-size: 12px;
   }
+}
+
+.hrSmall {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important
 }
 
 .border-top {
@@ -32,6 +37,10 @@ html {
 button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
+}
+
+.Overskrift {
+    color: #BC986A
 }
 
 /* Sticky footer styles

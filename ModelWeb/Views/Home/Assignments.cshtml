@@ -1,0 +1,143 @@
+﻿@model IEnumerable<IEnumerable<DAL.Assignment>>
+
+@{
+    ViewData["Title"] = "Assignments";
+}
+<body>
+
+
+
+    <div>
+        <h2 class="Overskrift" style="display: inline-block; float: left; margin-right: 33%">Tidligere opgaver</h2>
+        <h2 class="Overskrift" style="display: inline-block;">Kommende opgaver</h2>
+        <hr>
+        <table class="table" style="display: inline-block; float: left; width: 50%">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Client)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).DurationDays)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).NumModels)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Comments)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ElementAt(0))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DurationDays)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumModels)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+
+                        <td style="width: 85px">
+                            <hr class="hrSmall"/>
+                            <a class="nav-link text-dark" asp-action="AddExpense" asp-route-id="@item.Id">Tilføj udgift</a>
+                            <hr class="hrSmall"/>
+                            <a class="nav-link text-dark" asp-action="SeeExpenses" asp-route-id="@item.Id">Se udgifter</a>
+                            <hr class="hrSmall"/>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+        
+
+        <table class="table" style="display: inline-block; width: 50%; border-left: 1px solid #dee2e6; height: 500px;">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Client)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).DurationDays)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Location)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).NumModels)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ElementAt(0).Comments)
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody style="width: 1000px">
+                @foreach (var item in Model.ElementAt(1))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Client)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DurationDays)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Location)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NumModels)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Comments)
+                        </td>
+
+                        <td style="width: 85px">
+                            <hr class="hrSmall" />
+                            <a class="nav-link text-dark" asp-action="AddExpense" asp-route-id="@item.Id">Tilføj udgift</a>
+                            <hr class="hrSmall" />
+                            <a class="nav-link text-dark" asp-action="SeeExpenses" asp-route-id="@item.Id">Se udgifter</a>
+                            <hr class="hrSmall" />
+
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+
+    </div>
+
+    
+</body>
+

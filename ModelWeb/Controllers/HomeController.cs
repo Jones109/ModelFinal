@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using DAL;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using ModelWeb.Models;
 
 namespace ModelWeb.Controllers
@@ -13,33 +14,39 @@ namespace ModelWeb.Controllers
     public class HomeController : Controller
     {
         private UserManager<AppUser> _userManager;
+        private SignInManager<AppUser> _signInManager;
         private Repository _repository;
 
 
-        public HomeController(UserManager<AppUser> userManager)
+        public HomeController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
             _repository = new Repository();
             _repository.CreateDB();
         }
        
         public IActionResult Index()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Assignments");
+            }
             return View(_repository.GetAllModels().Result);
         }
 
-        public IActionResult PreviousAss()
+
+
+        public IActionResult Assignments()
         {
             AppUser currentUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
 
-            return View(_repository.GetPreviousAss(currentUser.ModelId));
-        }
+            List<List<Assignment>> list = new List<List<Assignment>>();
+            list.Add(_repository.GetPreviousAss(currentUser.ModelId));
+            list.Add(_repository.GetLaterAss(currentUser.ModelId));
 
-        public IActionResult FutureAss()
-        {
-            AppUser currentUser = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            return View(list);
 
-            return View(_repository.GetLaterAss(currentUser.ModelId));
         }
 
         public IActionResult AddExpense(int id)
@@ -63,7 +70,7 @@ namespace ModelWeb.Controllers
             };
             
             _repository.InsertExpense(newExpense);
-            return View("Index");
+            return RedirectToAction("Index");
         }
 
         public IActionResult SeeExpenses(int id)

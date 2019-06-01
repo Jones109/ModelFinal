@@ -55,19 +55,22 @@ html {
 }
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
-  display: block;
+    display: block;
+    
 }
 
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  text-align: left;
-  background-color: #fff;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: left;
+    background-color: #659DBD !important;
 }
+
+
 
 [tabindex="-1"]:focus {
   outline: 0 !important;
@@ -1515,9 +1518,11 @@ pre code {
 }
 
 .table {
-  width: 100%;
-  margin-bottom: 1rem;
-  background-color: transparent;
+    width: 50%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    color: white
+    
 }
 
 .table th,
@@ -1532,9 +1537,10 @@ pre code {
   border-bottom: 2px solid #dee2e6;
 }
 
-.table tbody + tbody {
-  border-top: 2px solid #dee2e6;
-}
+    .table tbody + tbody {
+        border-top: 2px solid #dee2e6;
+        
+    }
 
 .table .table {
   background-color: #fff;
@@ -3879,7 +3885,7 @@ input[type="button"].btn-block {
 
 .nav-link {
   display: block;
-  padding: 0.5rem 1rem;
+  padding: 0.0rem 0rem;
 }
 
 .nav-link:hover, .nav-link:focus {
@@ -3900,8 +3906,8 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-link {
   border: 1px solid transparent;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 0.0rem;
+  border-top-right-radius: 0.0rem;
 }
 
 .nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
@@ -3928,7 +3934,7 @@ input[type="button"].btn-block {
 }
 
 .nav-pills .nav-link {
-  border-radius: 0.25rem;
+  border-radius: 0.0rem;
 }
 
 .nav-pills .nav-link.active,
@@ -4083,8 +4089,8 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-sm .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.0rem;
+    padding-left: 0.0rem;
   }
   .navbar-expand-sm > .container,
   .navbar-expand-sm > .container-fluid {
@@ -4125,8 +4131,8 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-md .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.0rem;
+    padding-left: 0.0rem;
   }
   .navbar-expand-md > .container,
   .navbar-expand-md > .container-fluid {
@@ -4167,8 +4173,8 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.0rem;
+    padding-left: 0.0rem;
   }
   .navbar-expand-lg > .container,
   .navbar-expand-lg > .container-fluid {
@@ -4209,8 +4215,8 @@ input[type="button"].btn-block {
     position: absolute;
   }
   .navbar-expand-xl .navbar-nav .nav-link {
-    padding-right: 0.5rem;
-    padding-left: 0.5rem;
+    padding-right: 0.0rem;
+    padding-left: 0.0rem;
   }
   .navbar-expand-xl > .container,
   .navbar-expand-xl > .container-fluid {
@@ -4251,8 +4257,8 @@ input[type="button"].btn-block {
 }
 
 .navbar-expand .navbar-nav .nav-link {
-  padding-right: 0.5rem;
-  padding-left: 0.5rem;
+  padding-right: 0.0rem;
+  padding-left: 0.0rem;
 }
 
 .navbar-expand > .container,
