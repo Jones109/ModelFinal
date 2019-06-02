@@ -28,9 +28,12 @@ namespace ModelWpf
         {
             InitializeComponent();
 
+            
+
+        }
+  
         }
 
 
-
     }
-}
+

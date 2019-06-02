@@ -21,6 +21,8 @@ namespace DAL
         Task<ObservableCollection<Assignment>> GetIncomingAssignments();
 
         List<Assignment> AddModelToAssignment(int modelId, int assignmentId);
+        void DeleteModel(Model model);
+        void DeleteAssignment(Assignment assignment);
         bool CreateDB();
     }
 
@@ -57,6 +59,14 @@ namespace DAL
             }
         }
 
+        public async Task<ObservableCollection<Model>> GetAllModelsNoLogin()
+        {
+            using (var context = new AppDbContext(_options))
+            {
+                return new ObservableCollection<Model>(await context.Models.Where(x=>x.AppUser==null).ToListAsync());
+            }
+        }
+
         public int InsertModel(Model model)
         {
             using (var context = new AppDbContext(_options))
@@ -67,6 +77,38 @@ namespace DAL
             }
         }
 
+        public void DeleteModel(Model model)
+        {
+            using (var context = new AppDbContext(_options))
+            {
+                var modelAssignments = context.Model_Assignments.Where(x => x.ModelId == model.Id).ToList();
+
+                var assignments = context.Assignments.Where(z => modelAssignments.Exists(x => z.Id == x.AssignmentId)).Include(a => a.Model_Assignments)
+                    .ToList();
+
+                context.Models.Remove(model);
+                context.SaveChanges();
+
+                List<Assignment> updatedAssignments = new List<Assignment>();
+                foreach (var ass in assignments)
+                {
+                    updatedAssignments.AddRange(context.Assignments.Where(x => x.Id == ass.Id).Include(z => z.Model_Assignments).ToList()); 
+                }
+
+                foreach (var ass in updatedAssignments)
+                {
+                    if (ass.Model_Assignments.Count < ass.NumModels)
+                    {
+                        ass.Planned = false;
+                    }
+                }
+
+                context.UpdateRange(updatedAssignments);
+                context.SaveChanges();
+            }
+        }
+
+ 
 
         #endregion
 
@@ -104,6 +146,16 @@ namespace DAL
                 context.Assignments.Add(assignment);
                 context.SaveChanges();
                 return assignment.Id;
+            }
+        }
+
+        public void DeleteAssignment(Assignment assignment)
+        {
+            using (var context = new AppDbContext(_options))
+            {
+                context.Assignments.Remove(assignment);
+                context.SaveChanges();
+                
             }
         }
 
@@ -147,20 +199,55 @@ namespace DAL
         {
             using (var context = new AppDbContext(_options))
             {
+
+
                 Model_Assignment newModel_Assignment = new Model_Assignment
                 {
                     AssignmentId = assignmentId,
                     ModelId = modelId
                 };
 
+                if (!context.Model_Assignments.Any(x => x.AssignmentId == assignmentId && x.ModelId == modelId))
+                {
+                    context.Model_Assignments.Add(newModel_Assignment);
+                    context.SaveChanges();
+                }
 
-                context.Model_Assignments.Add(newModel_Assignment);
-                context.SaveChanges();
+                
 
                 return context.Assignments.Where(x => x.Id == assignmentId).Include(x => x.Model_Assignments).ToList();
 
             }
         }
+
+
+        public void RemoveModelFromAssignment(int modelId, int assignmentId)
+        {
+            using (var context = new AppDbContext(_options))
+            {
+
+
+                Model_Assignment deleteModel_Assignment = new Model_Assignment
+                {
+                    AssignmentId = assignmentId,
+                    ModelId = modelId
+                };
+
+                context.Model_Assignments.Remove(deleteModel_Assignment);
+                context.SaveChanges();
+
+                var ass = context.Assignments.Where(x => x.Id == assignmentId).Include(z=>z.Model_Assignments).ToList().First();
+
+                if (ass.Model_Assignments.Count < ass.NumModels)
+                {
+                    ass.Planned = false;
+                }
+
+                context.Assignments.Update(ass);
+                context.SaveChanges();
+            }
+        }
+
 
         #endregion
 

@@ -26,9 +26,6 @@ namespace ModelWpf
         
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
-        {
-            DialogResult = true;
-        }
+
     }
 }

@@ -5,39 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ModelWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="ModelApp" Height="800" Width="1200"
+        Background="{DynamicResource ResourceKey=BackgroundBrush}">
   <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
-    
+    <Window.Resources>
+        <Style TargetType="{x:Type Label}" >
+            <Setter Property="Foreground" Value="#FFFEFB" />
+        </Style>
+    </Window.Resources>
     <DockPanel Name ="dockPanelMain">
-        <ToolBar DockPanel.Dock="Top"  Height="39" FontSize="20" FontWeight="ExtraBold" Background="White">
-
-            <Button x:Name="addModelButton" ToolTip="Tilføj Model" HorizontalAlignment="Right" Command="{Binding Path=AddNewModelCommand}">
-            
-                <Image Source="..\Images\add.gif" />
-                </Button>
-
-            <Button ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="250,0,0,0" Command="{Binding Path=AddModelToAssignmentCommand}">
-                <Image Source="..\Images\add.gif" />
-            </Button>
-
-
-
-            <Button ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="250,0,0,0" Command="{Binding Path=AddNewAssignmentCommand}">
-                    <Image Source="..\Images\add.gif" />
-                </Button>
-
-            
-            
-
-
-        </ToolBar>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -45,7 +28,7 @@
             </Grid.RowDefinitions>
 
             <!--Binding Model-->
-            <Grid Grid.Column="0" Grid.Row="0">
+            <Grid Grid.Column="0" Grid.Row="0" Margin="2,2,2,2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*"/>
@@ -58,14 +41,17 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">Navn</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Telefon nummer</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Adresse</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Højde</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Vægt</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Hårfarve</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Kommentarer</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="25">Model Info</Label>
+
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Navn</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">Telefon nummer</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Adresse</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center">Højde</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Vægt</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center">Hårfarve</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center">Kommentarer</Label>
                 <TextBox Margin="0,0,0,0"
                          Name="tbxName" 
                          VerticalAlignment="Center" 
@@ -73,7 +59,7 @@
                          Text="{Binding Path=CurrentModel.Name, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="0"
+                         Grid.Row="1"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -83,7 +69,7 @@
                          Text="{Binding Path=CurrentModel.PhoneNumber, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="1"
+                         Grid.Row="2"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -93,7 +79,7 @@
                          Text="{Binding Path=CurrentModel.Address, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="2"
+                         Grid.Row="3"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -103,7 +89,7 @@
                          Text="{Binding Path=CurrentModel.Height, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="3"
+                         Grid.Row="4"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -113,7 +99,7 @@
                          Text="{Binding Path=CurrentModel.Weight, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="4"
+                         Grid.Row="5"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -123,7 +109,7 @@
                          Text="{Binding Path=CurrentModel.HairColor, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="5"
+                         Grid.Row="6"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -133,17 +119,20 @@
                          Text="{Binding Path=CurrentModel.Comments, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="6"
+                         Grid.Row="7"
                          MinWidth="100"
                 />
+               
             </Grid>
 
-            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2">
+            <Grid Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Margin="2,2,2,2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -151,12 +140,66 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" >Kunde navn</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">Start dato</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Antal dage</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center" >Lokation</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" >Antal modeller</Label>
-                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center">Kommentarer</Label>
+
+                <Grid Grid.Column="0" ColumnSpan="2" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+
+                    <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right">Modeller:</Label>
+                    <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">Opgaver:</Label>
+                    <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right">Model-Opgave Kobling:</Label>
+                <!--ToolBars here-->
+                <ToolBar Grid.Row="0" Grid.Column="1">
+                    <Button  x:Name="addModelButton" ToolTip="Tilføj Model" HorizontalAlignment="Left" Command="{Binding Path=AddNewModelCommand}"  Height="30">
+
+                        <Image Source="..\Images\add.gif" />
+                    </Button>
+                    <Button  x:Name="deleteModelButton" ToolTip="Slet Model" HorizontalAlignment="left" Command="{Binding Path=DeleteModelCommand}"  Height="30">
+
+                        <Image Source="..\Images\trashcan.jpg" />
+                    </Button>
+                    </ToolBar>
+              
+                    <ToolBar Grid.Row="1" Grid.Column="1">
+                    <Button   ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="0,0,0,0" Command="{Binding Path=AddNewAssignmentCommand}"  Height="30">
+                        <Image Source="..\Images\add.gif" />
+                    </Button>
+                        <Button  x:Name="deleteAssignmentButton" ToolTip="Slet Assignment" HorizontalAlignment="left" Command="{Binding Path=DeleteAssignmentCommand}"  Height="30">
+
+                            <Image Source="..\Images\trashcan.jpg" />
+                        </Button>
+                    </ToolBar>
+
+                <ToolBar Grid.Row="2" Grid.Column="1">
+                    <Button   ToolTip="Tilføj Opgave" HorizontalAlignment="Right" Margin="0,0,0,0" Command="{Binding Path=AddModelToAssignmentCommand}"  Height="30">
+                        <Image Source="..\Images\add.gif" />
+                    </Button>
+
+                    <Button  x:Name="removeModelFromAssButton" ToolTip="Fjern valgt model fra assignment" HorizontalAlignment="left" Command="{Binding Path=RemoveModelFromAssignmentCommand}"  Height="30">
+
+                        <Image Source="..\Images\trashcan.jpg" />
+                    </Button>
+                    </ToolBar>
+
+
+                </Grid>
+
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="25">Opgave Info</Label>
+
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center" >Kunde navn</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">Start dato</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="4" VerticalAlignment="Center" >Antal dage</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="5" VerticalAlignment="Center" >Lokation</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="6" VerticalAlignment="Center" >Antal modeller</Label>
+                <Label Margin="0,0,0,0" Grid.Column="0" Grid.Row="7" VerticalAlignment="Center">Kommentarer</Label>
 
                 <TextBox Margin="0,0,0,0"
                          Name="tbxClient" 
@@ -165,7 +208,7 @@
                          Text="{Binding Path=CurrentAss.Client, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="0"
+                         Grid.Row="2"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -175,7 +218,7 @@
                          Text="{Binding Path=CurrentAss.StartDate, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="1"
+                         Grid.Row="3"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -185,7 +228,7 @@
                          Text="{Binding Path=CurrentAss.DurationDays, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="2"
+                         Grid.Row="4"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -195,7 +238,7 @@
                          Text="{Binding Path=CurrentAss.Location, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="3"
+                         Grid.Row="5"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -205,7 +248,7 @@
                          Text="{Binding Path=CurrentAss.NumModels, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="4"
+                         Grid.Row="6"
                          MinWidth="100"
                 />
                 <TextBox Margin="0,0,0,0"
@@ -215,43 +258,120 @@
                          Text="{Binding Path=CurrentAss.Comments, IsAsync=True}"
                          IsReadOnly="True"
                          Grid.Column="1"
-                         Grid.Row="5"
+                         Grid.Row="7"
                          MinWidth="100"
                 />
-
+                
 
             </Grid>
-                <ListBox ItemsSource="{Binding Path=Models, IsAsync=True}"
-                     SelectedItem="{Binding Path=CurrentModel}"
-                     SelectedIndex="{Binding Path=CurrentModelIndex}"
-                     ItemTemplate="{StaticResource modelTemplate}"
-                     IsSynchronizedWithCurrentItem="True"
-                     Name="lbxModels" 
-                     Grid.Column="0"
-                     Grid.Row="1"
-                     Margin="0,0,0,0"
-            />
-            <ListBox ItemsSource="{Binding Path=PlannedAss, IsAsync=True}"
-                     SelectedItem="{Binding Path=CurrentAss}"
-                     SelectedIndex="{Binding Path=CurrentPlannedAssIndex}"
-                     ItemTemplate="{StaticResource assTemplate}"
-                     IsSynchronizedWithCurrentItem="True"
-                     Name="lbxPlannedAss" 
-                     Grid.Column="1"
-                     Grid.Row="1"
-                     Margin="0,0,0,0"
-            />
-            <ListBox ItemsSource="{Binding Path=IncomingAss, IsAsync=True}"
-                     SelectedItem="{Binding Path=CurrentAss}"
-                     SelectedIndex="{Binding Path=CurrentIncomingAssIndex}"
-                     ItemTemplate="{StaticResource assTemplate}"
-                     IsSynchronizedWithCurrentItem="True"
-                     Name="lbxIncomingAss" 
-                     Grid.Column="1"
-                     Grid.Row="0"
-                     Margin="0,0,0,0"
-             />
-            
+
+
+
+            <Grid Grid.Column="0" Grid.Row="1" Margin="2,2,2,2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Height="Auto" FontSize="25" HorizontalAlignment="Center">Modeller</Label>
+                <DataGrid ItemsSource="{Binding Path=Models, IsAsync=True}"
+                         SelectedItem="{Binding Path=CurrentModel}"
+                         SelectedIndex="{Binding Path=CurrentModelIndex}"
+                         ItemTemplate="{StaticResource modelTemplate}"
+                         IsReadOnly="true"
+                         IsSynchronizedWithCurrentItem="True"
+                         Name="lbxModels" 
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Margin="0,0,0,0"
+                         AutoGenerateColumns="False"
+                         BorderThickness="0"
+                         Style="{StaticResource ResourceKey=DataGridStyle}"
+                         
+                >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Navn" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Address}" Header="Adresse" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Height}" Header="Højde" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Weight}" Header="Vægt" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding HairColor}" Header="Hårfarve" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Comments}" Header="Bemærkning" IsReadOnly="True" Width="4*"/>
+                    </DataGrid.Columns>
+</DataGrid>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="1" Margin="2,2,2,2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Row="0" Height="Auto" FontSize="25" HorizontalAlignment="Center">Planlagte Opgaver</Label>
+                <DataGrid ItemsSource="{Binding Path=PlannedAss, IsAsync=True}"
+                         SelectedItem="{Binding Path=CurrentAss}"
+                         SelectedIndex="{Binding Path=CurrentPlannedAssIndex}"
+                         ItemTemplate="{StaticResource assTemplate}"
+                         IsSynchronizedWithCurrentItem="True"
+                         Name="lbxPlannedAss" 
+                         Grid.Column="0"
+                         Grid.Row="1"
+                         Margin="0,0,0,0"
+                         IsReadOnly="True"
+                         AutoGenerateColumns="False"
+                         BorderThickness="0"
+                         Style="{StaticResource ResourceKey=DataGridStyle}"
+
+                          
+                         
+                >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding Client}" Header="Klient" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding DurationDays}" Header="Dage" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Location}" Header="Sted" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding NumModels}" Header="Antal" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding StartDate}" Header="Dato" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Comments}" Header="Bemærkning" IsReadOnly="True" Width="4*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" Margin="2,2,2,2" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Height="Auto" FontSize="25" HorizontalAlignment="Center">Ikke Planlagte Opgaver</Label>
+                <DataGrid ItemsSource="{Binding Path=IncomingAss, IsAsync=True}"
+                          SelectedItem="{Binding Path=CurrentAss}"
+                          SelectedIndex="{Binding Path=CurrentIncomingAssIndex}"
+                          ItemTemplate="{StaticResource assTemplate}"
+                          IsSynchronizedWithCurrentItem="True"
+                          Name="lbxIncomingAss"
+                          Grid.Column="0"
+                          Grid.Row="1"
+                          Margin="0,0,0,0"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          BorderThickness="0"
+                          Style="{StaticResource ResourceKey=DataGridStyle}"
+                >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Foreground="White" Binding="{Binding Id}" Header="Id" IsReadOnly="True" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding Client}" Header="Klient" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding DurationDays}" Header="Dage" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding Location}" Header="Sted" IsReadOnly="True" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding NumModels}" Header="Antal" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding StartDate}" Header="Dato" IsReadOnly="True" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Comments}" Header="Bemærkning" IsReadOnly="True" Width="4*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
         </Grid>
     </DockPanel>
     

@@ -4,6 +4,16 @@
              xmlns:local="clr-namespace:ModelWpf"
              StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
+
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#38424A"/>
+
+        <Style x:Key="DataGridStyle" TargetType="{x:Type DataGrid}" >
+            <Style.Setters>
+                <Setter Property="Background" Value="{DynamicResource ResourceKey=BackgroundBrush}" />
+            </Style.Setters>
+        </Style>
+        
+
         <DataTemplate x:Key="modelTemplate">
             <WrapPanel>
                 <TextBlock Text="{Binding Path=Name}" Padding="5, 0" 

@@ -98,8 +98,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="applyButton" HorizontalAlignment="Center" Click="ButtonBase_OnClick"  Content="Tilføj" Grid.Column="0" BorderThickness="2"/>
-                <Button x:Name="closeButton" HorizontalAlignment="Center" Content="Luk" IsCancel="true" Grid.Column="1"/>
+                <Button x:Name="applyButton" HorizontalAlignment="Center" Command="{Binding Path=AcceptCommand}" Content="Tilføj" Grid.Column="0" BorderThickness="2"/>
+                <Button x:Name="closeButton" HorizontalAlignment="Center" Content="Luk" Command="{Binding Path=CloseCommand}" IsCancel="true" Grid.Column="1"/>
             </Grid>
             
                 

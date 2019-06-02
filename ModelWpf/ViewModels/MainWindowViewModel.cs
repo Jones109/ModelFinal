@@ -23,6 +23,9 @@ namespace ModelWpf
 
         AddModelWindow modelWindow = null;
         private Repository _repository;
+        private AddModelWindow amw = null;
+        private AddModelViewModel vm = null;
+
         public MainWindowViewModel()
         {
             _repository = new Repository();
@@ -40,6 +43,7 @@ namespace ModelWpf
 
             _repository.AddModelToAssignment(modelId, assId);
             */
+            
         }
 
 
@@ -140,21 +144,85 @@ namespace ModelWpf
             {
                 return _addNewModelCommand ?? (_addNewModelCommand = new DelegateCommand(() =>
                 {
-                    Model newModel = new Model();
-                    var vm = new AddModelViewModel(newModel);
-                    AddModelWindow amw = new AddModelWindow
+                    if (amw != null)
                     {
-                        DataContext = vm,
-                        Owner = Application.Current.MainWindow.Owner
-                    };
-                    if (amw.ShowDialog() == true)
-                    {
-                        _repository.InsertModel(newModel);
-                        RaisePropertyChanged("Models");
+                        amw.Focus();
                     }
+                    else
+                    {
+                        Model newModel = new Model();
+                        vm = new AddModelViewModel(newModel);
+                        amw = new AddModelWindow
+                        {
+                            DataContext = vm,
+                            Owner = Application.Current.MainWindow.Owner
+                        };
+
+                        vm.Apply += new EventHandler(addModelApply);
+                        vm.Close += new EventHandler(addModelClose);
+                        amw.Closed += new EventHandler(addModelClose);
+                        amw.Show();
+
+
+                        
+                    }
+
+                    
                 }));
             }
         }
+
+        private void addModelApply(object sender, EventArgs e)
+        {
+  
+            _repository.InsertModel(vm.NewModel);
+            RaisePropertyChanged("Models");
+            amw.Close();
+
+        }
+
+        private void addModelClose(object sender, EventArgs e)
+        {
+            vm.Apply -= new EventHandler(addModelApply);
+            vm.Close -= new EventHandler(addModelClose);
+            amw.Closed -= new EventHandler(addModelClose);
+            amw = null;
+            vm = null;
+            Application.Current.MainWindow.Focus();
+        }
+
+        private ICommand _deleteModelCommand;
+
+        public ICommand DeleteModelCommand
+        {
+            get
+            {
+                return _deleteModelCommand ?? (_deleteModelCommand = new DelegateCommand(() =>
+                {
+                    MessageBoxResult result = MessageBox.Show($"Vil du slette Model: {CurrentModel.Id}", "Er du sikker?", MessageBoxButton.YesNo);
+                    switch (result)
+                    {
+                        case MessageBoxResult.Yes:
+
+                            MessageBox.Show($"Model: {CurrentModel.Id} er slettet", "Slettet");
+                            _repository.DeleteModel(CurrentModel);
+                            RaisePropertyChanged("Models");
+                            RaisePropertyChanged("IncomingAss");
+                            RaisePropertyChanged("PlannedAss");
+
+                            break;
+                        case MessageBoxResult.No:
+
+                            break;
+                    }
+
+                    
+                }));
+            }
+        }
+
+
+
 
 
         ICommand _addNewAssignmentCommand;
@@ -181,6 +249,36 @@ namespace ModelWpf
             }
         }
 
+        private ICommand _deleteAssignmentCommand;
+
+        public ICommand DeleteAssignmentCommand
+        {
+            get
+            {
+                return _deleteAssignmentCommand ?? (_deleteAssignmentCommand = new DelegateCommand(() =>
+                           {
+                              
+
+                               MessageBoxResult result = MessageBox.Show($"Vil du slette Opgave: {CurrentAss.Id}", "Er du sikker?", MessageBoxButton.YesNo);
+                               switch (result)
+                               {
+                                   case MessageBoxResult.Yes:
+                                       
+                                       MessageBox.Show($"Opgave: {CurrentAss.Id} er slettet", "Slettet");
+                                       _repository.DeleteAssignment(CurrentAss);
+                                       RaisePropertyChanged("IncomingAss");
+                                       RaisePropertyChanged("PlannedAss");
+
+                                       break;
+                                   case MessageBoxResult.No:
+
+                                       break;
+                               }
+
+                           }));
+            }
+        }
+
         private ICommand _addModelToAssignmentCommand;
 
         public ICommand AddModelToAssignmentCommand
@@ -203,6 +301,36 @@ namespace ModelWpf
             })); }
         }
 
+
+        private ICommand _removeModelFromAssignmentCommand;
+
+        public ICommand RemoveModelFromAssignmentCommand
+        {
+            get
+            {
+                return _removeModelFromAssignmentCommand ?? (_removeModelFromAssignmentCommand = new DelegateCommand(
+                           () =>
+                           {
+                               MessageBoxResult result = MessageBox.Show($"Vil du fjerne Model: {CurrentModel.Id} fra Opgave: {CurrentAss.Id}", "Er du sikker?", MessageBoxButton.YesNo);
+                               switch (result)
+                               {
+                                   case MessageBoxResult.Yes:
+                                       _repository.RemoveModelFromAssignment(CurrentModel.Id, CurrentAss.Id);
+                                       MessageBox.Show($"Model: {CurrentModel.Id} er fjernet fra Opgave: {CurrentAss.Id}", "Fjernet");
+                                       RaisePropertyChanged("Models");
+                                       RaisePropertyChanged("IncomingAss");
+                                       RaisePropertyChanged("PlannedAss");
+                                       
+                                       break;
+                                   case MessageBoxResult.No:
+                                       
+                                       break;
+                               }
+
+                               
+                           }));
+            }
+        }
 
         #endregion
 

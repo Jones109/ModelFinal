@@ -32,7 +32,7 @@ namespace ModelWeb.Controllers
             {
                 return RedirectToAction("Assignments");
             }
-            return View(_repository.GetAllModels().Result);
+            return View(_repository.GetAllModelsNoLogin().Result);
         }
 
 

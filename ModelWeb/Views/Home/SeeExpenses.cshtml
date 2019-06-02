@@ -3,43 +3,48 @@
 @{
     ViewData["Title"] = "SeeExpenses";
 }
-<div style="width: 40%; margin-left: 30%">
+<div  id="vueapp" style="width: 40%; margin-left: 30%">
     <h2 class="Overskrift" style="margin-bottom: 30px">Udgifter</h2>
 
     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Assignments">Tilbage til oversigt</a>
+
+
     <table class="table">
         <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Text)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Amount)
-                </th>
-                <th></th>
-            </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th></th>
+        </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Text)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Amount)
-                    </td>
-                </tr>
-            }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+            </tr>
+        }
         </tbody>
     </table>
 </div>
+
+
+
 
 
 
